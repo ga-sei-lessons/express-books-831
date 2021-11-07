@@ -13,6 +13,8 @@ app.use((req, res, next) => {
   // invoke next to move along to the app method
   next()
 }) 
+// require express body parser middleware (so we can POST)
+app.use(express.json())
 
 // define our routes
 app.get('/', (req, res) => res.json({ msg: "welcome to the books API 📓" }))
