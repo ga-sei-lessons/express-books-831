@@ -29,5 +29,22 @@ router.get('/:id', (req, res) => {
   res.json({ book: selectedBook })
 })
 
+// PUT /books/:id -- UPDATE one book
+// PUT overwrite the whole object PATCH means just update a part of it
+router.put('/:id', (req, res) => {
+  const id = req.params.id
+  const book = req.body.book
+  book._id = id
+  books.splice(id, 1, book) // books.update({ })
+  res.redirect(`/books/${book._id}`)
+})
+
+// DELETE /books/:id -- DESTROY one book
+router.delete('/:id', (req, res) => {
+  const id = req.params.id
+  books.splice(id, 1)
+  res.redirect('/books') // redirects are always GET requests
+})
+
 // export the router
 module.exports = router
